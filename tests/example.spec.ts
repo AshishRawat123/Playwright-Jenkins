@@ -21,5 +21,5 @@ test('Jenkins webhooks and build on push', async ({ page }) => {
   await page.goto('https://playwright.dev/');
 
   // Click the get started link.
-  console.log('Added this  test for Jenkins webhooks and build on push')
+  console.log('Added this  test fo r Jenkins webhooks and build on push')
 });
