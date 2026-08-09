@@ -1,0 +1,13 @@
+{
+  "name": "jenkins-playwright-repo",
+  "version": "1.0.0",
+  "description": "To test playwright in jenkins",
+  "main": "index.js",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.2.0"
+  }
+}
