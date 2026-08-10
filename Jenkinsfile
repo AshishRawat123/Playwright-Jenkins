@@ -21,7 +21,7 @@ pipeline {
              steps {
                 withCredentials([
                     file(
-                        credentialsId: 'playwright-test-config',
+                        credentialsId: 'PLAYWRIGHT_SECRET_FILE',
                         variable: 'TEST_CONFIG'
                     )
                 ]) {
