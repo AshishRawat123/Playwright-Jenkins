@@ -1,4 +1,7 @@
 import { test, expect } from '@playwright/test';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 test('has title', async ({ page }) => {
   await page.goto('https://playwright.dev/');
@@ -12,6 +15,8 @@ test('get started link', async ({ page }) => {
 
   // Click the get started link.
   await page.getByRole('link', { name: 'Get started' }).click();
+  console.log('Login username : ',process.env.PLAYWRIGHT_username);
+  console.log('password: ',process.env.password);
 
   // Expects page to have a heading with the name of Installation.
   await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();

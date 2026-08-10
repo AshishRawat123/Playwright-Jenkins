@@ -18,9 +18,15 @@ pipeline {
         }
 
         stage('Run Tests') {
-            steps {
-                echo 'Running Playwright tests...'
-                bat 'npx playwright test'
+             steps {
+                withCredentials([
+                    file(
+                        credentialsId: 'playwright-test-config',
+                        variable: 'TEST_CONFIG'
+                    )
+                ]) {
+                    bat 'npx playwright test'
+                }
             }
         }
     }
