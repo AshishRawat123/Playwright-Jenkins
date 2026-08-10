@@ -32,7 +32,11 @@ test('Jenkins webhooks and build on push', async ({ page }) => {
 const secretFile = process.env.TEST_CONFIG;
 
 console.log('Secret file exists:', !!secretFile);
-console.log('username ',secretFile.PLAYWRIGHT_USERNAME);
+const credentials = JSON.parse(
+  fs.readFileSync(secretFile, 'utf-8')
+);
+
+console.log('Login username:', credentials.PLAYWRIGHT_USERNAME);
 
 if (!secretFile) {
   throw new Error('PLAYWRIGHT_SECRET_FILE is undefined');
