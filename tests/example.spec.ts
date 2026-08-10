@@ -29,7 +29,7 @@ test('Jenkins webhooks and build on push', async ({ page }) => {
   // Click the get started link.
   console.log('Added this  test fo r Jenkins webhooks and build on push');
 
-const secretFile = process.env.PLAYWRIGHT_SECRET_FILE;
+const secretFile = process.env.TEST_CONFIG;
 
 console.log('Secret file exists:', !!secretFile);
 
