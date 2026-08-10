@@ -22,7 +22,7 @@ pipeline {
                 withCredentials([
                     file(
                         credentialsId: 'PLAYWRIGHT_SECRET_FILE',
-                        variable: 'TEST_CONFIG'
+                        variable: 'ENV_FILE'
                     )
                 ]) {
                     bat 'npx playwright test'

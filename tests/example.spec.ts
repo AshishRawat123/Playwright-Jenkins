@@ -1,8 +1,9 @@
 import { test, expect } from '@playwright/test';
 import dotenv from 'dotenv';
-import fs from 'fs';
 
-dotenv.config();
+dotenv.config({
+  path: process.env.ENV_FILE || '.env'
+});
 
 test('has title', async ({ page }) => {
   await page.goto('https://playwright.dev/');
@@ -27,18 +28,16 @@ test('Jenkins webhooks and build on push', async ({ page }) => {
   await page.goto('https://playwright.dev/');
 
   // Click the get started link.
-  console.log('Added this  test fo r Jenkins webhooks and build on push');
+  console.log('Added this  test fo r Jenkins webhooks and build on push');  
+  console.log(
+    'Username:',
+    process.env.PLAYWRIGHT_USERNAME
+  );
+  
+  console.log(
+    'Password loaded:',
+    process.env.password
+  );
 
-const secretFile = process.env.TEST_CONFIG;
 
-console.log('Secret file exists:', !!secretFile);
-const credentials = JSON.parse(
-  fs.readFileSync(secretFile, 'utf-8')
-);
-
-console.log('Login username:', credentials.PLAYWRIGHT_USERNAME);
-
-if (!secretFile) {
-  throw new Error('PLAYWRIGHT_SECRET_FILE is undefined');
-}
 });
