@@ -97,7 +97,8 @@ ${JSON.stringify(failures, null, 2)}
 
     // 4. Call Gemini
     const ai = new GoogleGenAI({
-        apiKey: process.env.GEMINI_API_KEY
+        // apiKey: process.env.GEMINI_API_KEY
+        apiKey: 'AQ.Ab8RN6KlJ64UU3QFElCakO1tXUtWAlUq4Ch5TmsdS78h8AgB_A'
     });
 
     console.log('Sending failures to Gemini...');
