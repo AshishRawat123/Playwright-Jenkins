@@ -9,7 +9,7 @@ test('has title', async ({ page }) => {
   await page.goto('https://playwright.dev/');
 
   // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
+  await expect(page).toHaveTitle(/Playingwright/);
 });
 
 test('get started link', async ({ page }) => {
@@ -21,7 +21,7 @@ test('get started link', async ({ page }) => {
   console.log('password: ',process.env.password);
 
   // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).not.toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
 });
 
 test('Jenkins webhooks and build on push', async ({ page }) => {
