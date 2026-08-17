@@ -21,7 +21,7 @@ test('get started link', async ({ page }) => {
   console.log('password: ',process.env.password);
 
   // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Installation' })).not.toBeVisible();
 });
 
 test('Jenkins webhooks and build on push', async ({ page }) => {
