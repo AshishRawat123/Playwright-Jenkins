@@ -41,3 +41,14 @@ test('Jenkins webhooks and build on push', async ({ page }) => {
 
 
 });
+test.only('download file', async ({page})=>{
+  await page.goto('https://commitquality.com/practice-file-download');
+  // added Even Listner to listen loadload event
+  const downloadEvent = page.waitForEvent('download');
+  await page.getByRole('button', {name:'Download File'}).click();
+  // wait for it to complete
+  const download = await downloadEvent;
+  // save into the desired location
+  await download.saveAs('./downloads/'+'heydownload');
+
+})
