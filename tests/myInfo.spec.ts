@@ -68,7 +68,7 @@ test("change employee name and save changes", async ({ page }) => {
   await expect(infoPage.lastNameInput).toHaveValue("Updated");
 });
 
-test.only('update the UI by API interceptor modifcation', async ({page})=>{
+test('update the UI by API interceptor modifcation', async ({page})=>{
 
     // 1. intercept the request and modify it how its looks like or you can say mock it
     await page.route('**/v2/admin/users**', async route => {
