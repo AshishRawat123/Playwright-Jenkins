@@ -21,6 +21,7 @@ test.beforeEach(async ({ page }) => {
 
   // Login with valid credentials
   await loginPage.login(username, password);
+  await page.waitForLoadState('networkidle');
   await loginPage.verifySuccessfulLogin();
 });
 
