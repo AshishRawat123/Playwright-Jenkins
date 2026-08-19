@@ -34,7 +34,7 @@ export class LoginPage {
   }
 
   async verifySuccessfulLogin() {
-    await expect(this.dashboardHeading).toBeVisible();
+    await expect(this.page.locator('a.oxd-brand')).toBeVisible();
   }
 
   async verfiyInvalidLogin() {
