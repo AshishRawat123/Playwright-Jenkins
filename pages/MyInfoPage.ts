@@ -1,7 +1,9 @@
 import { Page, Locator,expect } from '@playwright/test';
+import { CommonHelper } from '../helpers/commonHelper';
 
 export class MyInfoPage {
   readonly page: Page;
+  private readonly commonHelper;
 
   readonly firstNameInput: Locator;
   readonly middleNameInput: Locator;
@@ -10,6 +12,7 @@ export class MyInfoPage {
 
   constructor(page: Page) {
     this.page = page;
+    this.commonHelper = new CommonHelper(this.page);
 
     // Using HTML attributes
     this.firstNameInput = page.locator('input[name="firstName"]');
@@ -26,7 +29,7 @@ export class MyInfoPage {
     }).click();
     await this.page.waitForLoadState('networkidle');
     await this.page.locator('.oxd-loading-spinner').last().waitFor({state:'hidden'})
-    await this.waitForAllLoadersToDisappear()
+    await this.commonHelper.waitForAllLoadersToDisappear()
     await this.page.waitForLoadState("domcontentloaded");
   }
 
@@ -46,16 +49,7 @@ export class MyInfoPage {
 
   async reloadPage() {
     await this.page.reload();
-    await this.waitForAllLoadersToDisappear();
+    await this.commonHelper.waitForAllLoadersToDisappear();
   }
 
-  async waitForAllLoadersToDisappear() {
-  const loaders = this.page.locator('.oxd-loading-spinner');
-
-  const count = await loaders.count();
-
-  for (let i = 0; i < count; i++) {
-    await expect(loaders.nth(i)).toBeHidden();
-  }
-}
 }
