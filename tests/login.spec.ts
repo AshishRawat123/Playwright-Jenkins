@@ -46,7 +46,7 @@ test.describe("OrangeHRM Login", () => {
   });
 
   for(const details of InvalidCredential){
-    test.only(`should not login successfully with Invalid credentials ${details.user} and password ${details.pass}`, async ({ page }) => {
+    test(`should not login successfully with Invalid credentials ${details.user} and password ${details.pass}`, async ({ page }) => {
     const loginPage = new LoginPage(page);
 
     // Navigate to login page
