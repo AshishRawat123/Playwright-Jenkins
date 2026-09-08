@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { test } from "../Fixtures/fixtures";
 import { LoginPage } from "../pages/LoginPage";
 import dotenv from "dotenv";
 
@@ -20,8 +20,7 @@ test.describe("OrangeHRM Login", () => {
     {user:'admin', pass:'admin'}
   ]
 
-  test("should login successfully with valid credentials", async ({ page }) => {
-    const loginPage = new LoginPage(page);
+  test("should login successfully with valid credentials", async ({ page, loginPage}) => {
 
     // Navigate to login page
     await loginPage.goto();

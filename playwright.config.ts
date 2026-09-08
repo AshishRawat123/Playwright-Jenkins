@@ -37,16 +37,22 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('')`. */
     baseURL: 'https://opensource-demo.orangehrmlive.com',
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    /* Collect trace ('retain-on-failure') when test fails. See https://playwright.dev/docs/trace-viewer
+    //  Collect trace (on-first-retry) while executing in second run when test fail for the first time */
     trace: 'retain-on-failure',
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'ui',
+      testDir :'../test',
+      use: { ...devices['Desktop Chrome'] , headless:true},
     },
+    {
+      name : 'api',
+      testDir : './api'
+    }
 
     /* Test against mobile viewports. */
     // {
