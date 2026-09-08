@@ -17,7 +17,7 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
+        stage('Run UI Tests') {
              steps {
                 withCredentials([
                     file(
@@ -25,7 +25,14 @@ pipeline {
                         variable: 'ENV_FILE'
                     )
                 ]) {
-                    bat 'npx playwright test'
+                    bat 'npx playwright test --project=ui'
+                }
+            }
+        }
+        stage('Run API Tests') {
+             steps {
+                {
+                    bat 'npx playwright test --project=api'
                 }
             }
         }
