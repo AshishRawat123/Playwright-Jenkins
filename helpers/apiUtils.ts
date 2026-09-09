@@ -10,7 +10,7 @@ export async function apiRequest(
   console.log("=*=*=*=*=*=*=*=*=*=* API REQUEST =*=*=*=*=*=*=*=*=*=*");
   console.log(chalk.green("Method :"), method);
   console.log(chalk.green("URL :"), url);
-  console.log(chalk.yellow("Header : "), maskSensitiveHeader(options.header));
+  console.log(chalk.yellow("Header : "), maskSensitiveHeader(options.headers));
   console.log(chalk.yellow("body : "), maskSensitiveHeader(options.body));
 
   const start = Date.now();
@@ -56,21 +56,21 @@ export async function defaultGetRequest(
 
 function maskSensitiveHeader(header: any) {
   const sensitiveKeys = [
-    "Cookie",
+    "cookie",
     "token",
     "api-key",
-    "Authorization",
-    "Bearer",
+    "authorization",
+    "bearer",
     "password"
   ];
   const copyMasked = { ...header };
   for (const key of Object.keys(copyMasked)) {
-    // Either property or its key contains any of the sensitive keys . mask it
+    // Either property or its key contains any of the sensitive keys. mask it
     if (
-      sensitiveKeys.includes(key) ||
-      sensitiveKeys.includes(copyMasked[key])
+      sensitiveKeys.includes(key.toLocaleLowerCase()) ||
+      sensitiveKeys.includes(String(copyMasked[key]).toLocaleLowerCase())
     ) {
-      copyMasked[key] = "*******";
+      copyMasked[key] = "************";
     }
   }
   return copyMasked;

@@ -4,3 +4,8 @@ export interface createUser {
     gender: String,
     status: String
 }
+
+export interface requestModel {
+    headers: any,
+    body: any
+}
