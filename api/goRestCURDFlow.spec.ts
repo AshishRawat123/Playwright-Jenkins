@@ -10,13 +10,13 @@ var createdUserID: number;
 
 const createuser: createUser = {
     name: faker.person.firstName(),
-    email: faker.person.lastName(),
+    email: faker.person.lastName()+"@exam.com",
     gender: faker.person.sex(),
     status: "active",
 };
 const AuthHeader = {
     Authorization:
-        "Bearer 90f73022d42112f6392d8334f6c77a003131cf781899041688eff15ced9d8b5d",
+        "Bearer d09bf8db622c67242ec9c98652e59056e44f23c0adfcd57b02d75abf348431cf",
 };
 test.describe.configure({ mode: "serial" });
 
@@ -37,6 +37,7 @@ test.afterEach("Open start URL", () => {
         "\n*********************************************************\n",
     ))
 });
+
 
 test("validate and get all users list", async ({ request }) => {
     const response = await request.get("/public/v2/users");
@@ -74,10 +75,7 @@ test(`get user by id `, async ({ request }) => {
 
 test("create new user", async ({ request }) => {
     const Obj = {
-        header: {
-            Authorization:
-                "Bearer 90f73022d42112f6392d8334f6c77a003131cf781899041688eff15ced9d8b5d",
-        },
+        headers: AuthHeader,
         body: createuser,
     };
 
@@ -90,6 +88,7 @@ test("create new user", async ({ request }) => {
     console.log(await responseWithTime.respone.json());
     createdUserID = (await responseWithTime.respone.json()).id;
 });
+
 
 test("Update user details that we pushed", async ({ request }) => {
     const fullName = faker.person.fullName();
@@ -137,10 +136,11 @@ test("Update user details that we pushed", async ({ request }) => {
 });
 
 test("Negative Test - create user with same email", async ({ request }) => {
-    createuser.email = firstEmail;
+    const copied = {...createuser};
+    copied.email = firstEmail;
     const Obj = {
         headers: AuthHeader,
-        body: createuser,
+        body: copied,
     };
     const responseWithTime = await apiRequest(
         request,
@@ -154,3 +154,22 @@ test("Negative Test - create user with same email", async ({ request }) => {
         "has already been taken",
     );
 });
+
+test("Delete user by ID", async ({request})=>{
+
+    const Obj = {
+        headers: AuthHeader,
+        body: {...createuser, "id": createdUserID},
+    };
+    const responseWithTime = await apiRequest(
+        request,
+        "delete",
+        `/public/v2/users/${createdUserID}`,
+        Obj,
+    );
+
+    expect(responseWithTime.respone.status()).toBe(204);
+    const newResponse = await apiRequest(request,'get',`/public/v2/users/${createdUserID}`,{headers: AuthHeader});
+    expect((await newResponse.respone.json()).message).toBe("Resource not found")
+
+})
