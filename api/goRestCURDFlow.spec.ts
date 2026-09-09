@@ -2,6 +2,7 @@ import test, { expect } from "@playwright/test";
 import { createUser, requestModel } from "../models/userDetails";
 import { faker } from "@faker-js/faker";
 import { apiRequest, defaultGetRequest } from "../helpers/apiUtils";
+import chalk from "chalk";
 
 var firstUserID: number;
 var firstEmail: String;
@@ -24,11 +25,17 @@ test.use({
 });
 
 test.beforeEach("Open start URL", () => {
-    console.log(
+    console.log(chalk.bold.underlineGreen(
         "\n*************************",
         test.info().title,
         "********************************\n",
-    );
+    ))
+});
+
+test.afterEach("Open start URL", () => {
+    console.log(chalk.bold.underlineGreen(
+        "\n*********************************************************\n",
+    ))
 });
 
 test("validate and get all users list", async ({ request }) => {
@@ -39,9 +46,9 @@ test("validate and get all users list", async ({ request }) => {
     expect(firstUserID).not.toBe(0);
     expect((await response.json()).length).toBe(10);
     console.log("TEST END");
-    console.log("first User ID is   ", firstUserID);
-    console.log("email of first : ", firstEmail);
+
 });
+
 
 test(`get user by id `, async ({ request }) => {
     /* Add more description to Test as if we put in test Desription we
