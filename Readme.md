@@ -15,3 +15,9 @@
 
 # Remove .env file for security purposes and manage a secret file in jenkins for that. Also name it "PLAYWRIGHT_SECRET_FILE" as per mentioned in Jenkins file
 
+# Added Planner agent files
+*<jira-requiremnet-reader> agent will read the jira tickets directly by using the jira MCP server and You have to config jira MCP globally*
+*<test-requirement-planner> agent will ingest the output by the above agent and create test by using the playwright MCP server*
+*Also this handsoff is done by using the YAML mentioned in the .md file and we will get the option in copilot to approve the second agent to start*
+
+
